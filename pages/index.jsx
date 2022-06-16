@@ -92,6 +92,7 @@ export default function Home() {
 
       if (accounts.length > 0) {
         const account = accounts[0];
+        setCurrentAccount(account)
         console.log("wallet is connected! " + account);
       } else {
         console.log("make sure MetaMask is connected");
@@ -119,6 +120,8 @@ export default function Home() {
     }
   }
 
+
+
   const buyCoffee = async (option) => {
     try {
       const {ethereum} = window;
@@ -133,13 +136,14 @@ export default function Home() {
         );
 
         console.log("buying coffee..")
+        let coffeeTxn;
         if (option===1) {
-        const coffeeTxn = await buyMeACoffee.buyCoffee(
+          coffeeTxn = await buyMeACoffee.buyCoffee(
           name ? name : "anon",
           message ? message : "Enjoy your coffee!",
           {value: ethers.utils.parseEther("0.001")}
         )} else {
-          const coffeeTxn = await buyMeACoffee.buyLargerCoffee(
+         coffeeTxn = await buyMeACoffee.buyLargerCoffee(
           name ? name : "anon",
           message ? message : "Enjoy your coffee!",
           {value: ethers.utils.parseEther("0.003")}
